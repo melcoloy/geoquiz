@@ -23,6 +23,8 @@
           <label><input type="radio" name="mode" value="flag" checked><span>🏳️ Drapeau → Pays</span></label>
           <label><input type="radio" name="mode" value="reverse"><span>🔤 Pays → Drapeau</span></label>
           <label><input type="radio" name="mode" value="capital"><span>🏛️ Pays → Capitale</span></label>
+          <label><input type="radio" name="mode" value="type"><span>✍️ Drapeau → Écrire le pays</span></label>
+          <label><input type="radio" name="mode" value="map"><span>🗺️ Pays → Carte</span></label>
         </div>
 
         <h2>Région</h2>
@@ -42,6 +44,11 @@
           <label><input type="radio" name="count" value="all"><span>Tous</span></label>
         </div>
 
+        <h2>Options</h2>
+        <div class="options">
+          <label><input type="checkbox" id="timed"><span>⏱️ Contre-la-montre (60 s)</span></label>
+        </div>
+
         <button id="btn-start" class="btn primary">Jouer</button>
       </div>
 
@@ -50,6 +57,12 @@
         <p class="muted">10 drapeaux, les mêmes pour tout le monde aujourd'hui.</p>
         <p id="daily-status" class="daily-status"></p>
         <button id="btn-daily" class="btn">Lancer le défi</button>
+      </div>
+
+      <div class="card">
+        <h2>🔁 Révision</h2>
+        <p id="review-status" class="muted"></p>
+        <button id="btn-review" class="btn">Réviser mes erreurs</button>
       </div>
 
       <div class="card">
@@ -68,13 +81,14 @@
       <div class="progress-bar"><div id="progress-fill"></div></div>
 
       <div id="q-prompt" class="prompt"></div>
-      <div id="q-choices" class="choices"></div>
+      <div id="q-answer"></div>
+      <p id="q-feedback" class="feedback" aria-live="polite"></p>
 
       <div class="quiz-footer">
         <button id="btn-quit" class="btn ghost">Quitter</button>
         <button id="btn-next" class="btn primary" hidden>Suivant →</button>
       </div>
-      <p class="hint muted">Raccourcis : touches 1–4 pour répondre, Entrée pour continuer.</p>
+      <p class="hint muted"><span id="q-hint">Raccourcis : touches 1–4 pour répondre, Entrée pour continuer.</span></p>
     </section>
 
     <!-- ===== ÉCRAN RÉSULTAT ===== -->
@@ -99,9 +113,10 @@
     </section>
   </main>
 
-  <footer class="muted">Drapeaux fournis par <a href="https://flagcdn.com" target="_blank" rel="noopener">flagcdn.com</a></footer>
+  <footer class="muted">Drapeaux : <a href="https://flagcdn.com" target="_blank" rel="noopener">flagcdn.com</a> · Carte : <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a></footer>
 
   <script src="js/data.js"></script>
+  <script src="js/map.js"></script>
   <script src="js/game.js"></script>
   <script src="js/ui.js"></script>
 </body>

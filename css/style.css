@@ -12,6 +12,9 @@
   --bad-bg: #fbe7e7;
   --radius: 14px;
   --shadow: 0 4px 18px rgba(20, 30, 60, 0.07);
+  --land: #c9d3e6;
+  --land-other: #e3e8f2;
+  --sea: #e8f0ff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,6 +30,9 @@
     --bad: #f06a6a;
     --bad-bg: #3a1c1f;
     --shadow: none;
+    --land: #3a4560;
+    --land-other: #252c3d;
+    --sea: #151b29;
   }
 }
 
@@ -85,6 +91,7 @@ body {
   transition: 0.15s;
 }
 .options input:checked + span { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.options input:disabled + span { opacity: 0.4; cursor: not-allowed; }
 .options input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 select {
@@ -111,7 +118,8 @@ select {
   cursor: pointer;
   transition: transform 0.1s, filter 0.15s;
 }
-.btn:hover { filter: brightness(0.96); }
+.btn:hover:not(:disabled) { filter: brightness(0.96); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn:active { transform: scale(0.98); }
 .btn.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
 .btn.ghost { background: transparent; }
@@ -175,6 +183,53 @@ select {
 
 .quiz-footer { display: flex; justify-content: space-between; align-items: center; }
 .hint { text-align: center; font-size: 0.8rem; margin-top: 12px; }
+
+#q-progress.urgent { color: var(--bad); }
+
+/* ---------- Retour sous la réponse ---------- */
+.feedback { min-height: 1.6em; text-align: center; font-weight: 600; margin: 12px 0 4px; }
+.feedback.good { color: var(--good); }
+.feedback.bad { color: var(--bad); }
+
+/* ---------- Saisie libre ---------- */
+.type-form { display: flex; gap: 8px; flex-wrap: wrap; }
+.type-form input {
+  flex: 1 1 220px;
+  padding: 12px 14px;
+  font-size: 1.1rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+}
+.type-form input:focus { outline: none; border-color: var(--accent); }
+.type-form input.correct { border-color: var(--good); background: var(--good-bg); }
+.type-form input.wrong { border-color: var(--bad); background: var(--bad-bg); animation: shake 0.3s; }
+.type-form .btn { margin-top: 0; }
+
+/* ---------- Carte ---------- */
+.map-box {
+  background: var(--sea);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.world-map { display: block; width: 100%; height: auto; max-height: 60vh; }
+.world-map path, .world-map circle {
+  fill: var(--land);
+  stroke: var(--card);
+  stroke-width: var(--stroke, 0.6);
+  stroke-linejoin: round;
+  transition: fill 0.15s;
+}
+.world-map .other { fill: var(--land-other); pointer-events: none; }
+.world-map [data-code] { cursor: pointer; }
+.world-map .marker { r: var(--marker-r, 4); fill-opacity: 0.85; stroke: var(--text); stroke-opacity: 0.35; }
+.world-map:not(.locked) [data-code]:hover { fill: var(--accent); }
+.world-map.locked [data-code] { cursor: default; }
+.world-map .correct { fill: var(--good); }
+.world-map .wrong { fill: var(--bad); }
+.world-map .marker.correct, .world-map .marker.wrong { r: calc(var(--marker-r, 4) * 2); fill-opacity: 1; }
 
 /* ---------- Résultats ---------- */
 .big { font-size: 2.2rem; font-weight: 800; }
