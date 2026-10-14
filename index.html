@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GéoQuiz — Drapeaux & Capitales</title>
+  <meta name="description" content="Quiz de géographie : drapeaux, pays et capitales du monde.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1>🌍 GéoQuiz</h1>
+    </header>
+
+    <!-- ===== ÉCRAN MENU ===== -->
+    <section id="screen-menu" class="screen active">
+      <p class="subtitle">Teste tes connaissances en drapeaux et capitales.</p>
+
+      <div class="card">
+        <h2>Mode de jeu</h2>
+        <div class="options">
+          <label><input type="radio" name="mode" value="flag" checked><span>🏳️ Drapeau → Pays</span></label>
+          <label><input type="radio" name="mode" value="reverse"><span>🔤 Pays → Drapeau</span></label>
+          <label><input type="radio" name="mode" value="capital"><span>🏛️ Pays → Capitale</span></label>
+        </div>
+
+        <h2>Région</h2>
+        <select id="continent">
+          <option value="all">🌐 Monde entier</option>
+          <option value="Europe">Europe</option>
+          <option value="Afrique">Afrique</option>
+          <option value="Asie">Asie</option>
+          <option value="Amériques">Amériques</option>
+          <option value="Océanie">Océanie</option>
+        </select>
+
+        <h2>Nombre de questions</h2>
+        <div class="options">
+          <label><input type="radio" name="count" value="10" checked><span>10</span></label>
+          <label><input type="radio" name="count" value="20"><span>20</span></label>
+          <label><input type="radio" name="count" value="all"><span>Tous</span></label>
+        </div>
+
+        <button id="btn-start" class="btn primary">Jouer</button>
+      </div>
+
+      <div class="card">
+        <h2>📅 Défi du jour</h2>
+        <p class="muted">10 drapeaux, les mêmes pour tout le monde aujourd'hui.</p>
+        <p id="daily-status" class="daily-status"></p>
+        <button id="btn-daily" class="btn">Lancer le défi</button>
+      </div>
+
+      <div class="card">
+        <h2>🏆 Meilleurs scores</h2>
+        <ul id="best-scores" class="best-scores"></ul>
+      </div>
+    </section>
+
+    <!-- ===== ÉCRAN QUIZ ===== -->
+    <section id="screen-quiz" class="screen">
+      <div class="quiz-header">
+        <span id="q-progress">1 / 10</span>
+        <span id="q-streak">🔥 0</span>
+        <span id="q-score">0 pts</span>
+      </div>
+      <div class="progress-bar"><div id="progress-fill"></div></div>
+
+      <div id="q-prompt" class="prompt"></div>
+      <div id="q-choices" class="choices"></div>
+
+      <div class="quiz-footer">
+        <button id="btn-quit" class="btn ghost">Quitter</button>
+        <button id="btn-next" class="btn primary" hidden>Suivant →</button>
+      </div>
+      <p class="hint muted">Raccourcis : touches 1–4 pour répondre, Entrée pour continuer.</p>
+    </section>
+
+    <!-- ===== ÉCRAN RÉSULTAT ===== -->
+    <section id="screen-result" class="screen">
+      <div class="card center">
+        <h2 id="r-title"></h2>
+        <p id="r-summary" class="big"></p>
+        <p id="r-details" class="muted"></p>
+        <div id="r-grid" class="emoji-grid"></div>
+        <button id="btn-share" class="btn" hidden>📋 Copier le résultat</button>
+      </div>
+
+      <div class="card" id="r-mistakes-card">
+        <h2>À revoir</h2>
+        <ul id="r-mistakes" class="mistakes"></ul>
+      </div>
+
+      <div class="row">
+        <button id="btn-replay" class="btn primary">Rejouer</button>
+        <button id="btn-menu" class="btn">Menu</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="muted">Drapeaux fournis par <a href="https://flagcdn.com" target="_blank" rel="noopener">flagcdn.com</a></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
